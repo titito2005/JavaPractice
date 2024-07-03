@@ -606,5 +606,109 @@ public class DecoratorPatternExample {
 }
 ```
 
+## Excepciones
+throw se utiliza para lanzar manualmente una excepción en un método, mientras que throws se utiliza en la firma del método para indicar que el método puede lanzar una o más excepciones.
+```java
+    public class CustomExceptionExample {
+        public static void main(String[] args) {
+            try {
+                validateAge(15);
+            } catch (InvalidAgeException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    
+        // Método que lanza una excepción personalizada usando throw
+        public static void validateAge(int age) throws InvalidAgeException {
+            if (age < 18) {
+                throw new InvalidAgeException("La edad mínima requerida es 18 años.");
+            } else {
+                System.out.println("Edad válida.");
+            }
+        }
+    }
+    
+    // Clase de excepción personalizada
+    class InvalidAgeException extends Exception {
+        public InvalidAgeException(String message) {
+            super(message);
+        }
+    }
+```
+### Lista de excepciones:
+1. Excepciones integradas en Java:
+- NullPointerException: Lanzada cuando intentas acceder a un objeto que es null.
+- IllegalArgumentException: Lanzada cuando un método recibe un argumento ilegal.
+- IllegalStateException: Lanzada cuando el estado de un objeto no es válido para realizar la operación solicitada.
+- ArithmeticException: Lanzada cuando ocurre un error aritmético, como la división por cero.
+- ArrayIndexOutOfBoundsException: Lanzada cuando intentas acceder a un índice fuera de los límites de un array.
+- FileNotFoundException: Lanzada cuando intentas acceder a un archivo que no existe.
+
+2. Excepciones personalizadas:
+- Puedes crear tus propias clases de excepción extendiendo Exception o RuntimeException según si deseas una excepción verificada o no verificada.
+- Por ejemplo, CustomException, InvalidInputException, etc.
+
+3. Excepciones de JDBC:
+- Al usar JDBC (Java Database Connectivity), puedes lanzar excepciones como SQLException para manejar errores relacionados con la conexión o consultas a la base de datos.
+
+4. Excepciones de IO (Entrada/Salida):
+- IOException: Lanzada cuando ocurre un error durante operaciones de entrada/salida, como leer/escribir archivos.
+- FileNotFoundException: Una subclase de IOException, lanzada específicamente cuando un archivo no se encuentra.
+
+5. Excepciones de red:
+- SocketException: Lanzada cuando hay un problema con un socket de red, como la conexión perdida.
+
+
+### Ejercicios:
+1. Ejercicio de Programación Básica: Calcular el Factorial
+Descripción: Escribe un programa que calcule el factorial de un número dado.
+Ejemplo: Si el número es 5, el factorial sería 5! = 5 * 4 * 3 * 2 * 1 = 120.
+Conceptos a Practicar: Bucles (for o while), recursión.
+
+2. Ejercicio de Manejo de Arrays: Encontrar el Número Mayor
+Descripción: Escribe un programa que encuentre el número más grande en un array de enteros.
+Ejemplo: Para el array [5, 2, 9, 1, 5], el número más grande es 9.
+Conceptos a Practicar: Uso de arrays, bucles (for), variables temporales.
+
+3. Ejercicio de Manejo de Cadenas: Invertir una Cadena
+Descripción: Escribe un programa que invierta una cadena de caracteres.
+Ejemplo: Si la cadena es "Java", el resultado debería ser "avaJ".
+Conceptos a Practicar: Operaciones con cadenas, bucles (for), manipulación de índices.
+
+4. Problema de Programación Orientada a Objetos: Modelar una Tienda
+Descripción: Crea clases en Java para modelar una tienda que tenga productos y clientes. Incluye métodos para agregar productos al carrito de un cliente y calcular el total.
+Conceptos a Practicar: Definición de clases, métodos, encapsulamiento, uso de colecciones (List).
+
+5. Problema de Excepciones: Manejo de Errores de Entrada de Usuario
+Descripción: Escribe un programa que solicite un número al usuario y maneje posibles errores de entrada incorrecta (por ejemplo, letras en lugar de números).
+Conceptos a Practicar: Manejo de excepciones (try-catch), entrada/salida (Scanner).
+
+6. Problema de Manejo de Cadenas: Contar Vocales
+Descripción: Escribe un programa que cuente el número de vocales en una cadena dada (sin distinción entre mayúsculas y minúsculas).
+Ejemplo: Para la cadena "Java es divertido", el resultado debería ser 7.
+Conceptos a Practicar: Operaciones con cadenas, bucles, métodos de cadena.
+
+7. Ejercicio de Matrices: Suma de Elementos en Matriz
+Descripción: Escribe un programa que calcule la suma de todos los elementos en una matriz 2D.
+Ejemplo: Para la matriz {{1, 2}, {3, 4}}, la suma sería 1 + 2 + 3 + 4 = 10.
+Conceptos a Practicar: Matrices, bucles anidados.
+
+8. Problema de Manejo de Excepciones: Validación de Edad
+Descripción: Escribe un programa que valide la edad ingresada por un usuario y lance una excepción personalizada si la edad es menor que 18.
+Conceptos a Practicar: Manejo de excepciones personalizadas, entrada de datos (Scanner).
+
+9. Ejercicio de Recursión: Fibonacci
+Descripción: Escribe un programa que calcule el n-ésimo término de la secuencia de Fibonacci de manera recursiva.
+Conceptos a Practicar: Recursión, funciones recursivas.
+
+10. Ejercicio de Manejo de Archivos: Conteo de Palabras en un Archivo
+Descripción: Escribe un programa que lea un archivo de texto y cuente la frecuencia de cada palabra.
+Conceptos a Practicar: Entrada/Salida de archivos (File, BufferedReader), manipulación de cadenas, colecciones (Map).
+
+11. Problema de Programación Orientada a Objetos: Gestión de Biblioteca
+Descripción: Crea clases en Java para modelar una biblioteca. Incluye clases para libros, usuarios (clientes), y métodos para prestar libros, devolver libros, y consultar disponibilidad.
+Conceptos a Practicar: Definición de clases, relaciones entre objetos, métodos, colecciones (List, Map).
+
+
 Mas información:
 https://www.geeksforgeeks.org/java-developer-learning-path-a-complete-roadmap/
