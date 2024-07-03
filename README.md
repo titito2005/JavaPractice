@@ -266,12 +266,345 @@ Una Stack es una colección que sigue el principio LIFO (Last In, First Out). St
     }
 ```
 
+## Interfaces, herencia, clases abstractas y polimofismo
+### Interfaces
+Contiene métodos abstractos que las clases implementadoras deben definir. Las interfaces pueden contener métodos por defecto con implementación y métodos estáticos.
+```java
+interface Animal {
+    void makeSound();
+    void move();
+}
 
-Review:
-Interfaces
-Extends
-Base Class
-List/Maps
-Patrones de diseno
+class Dog implements Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Woof");
+    }
 
+    @Override
+    public void move() {
+        System.out.println("Run");
+    }
+
+    public class InterfaceExample {
+        public static void main(String[] args) {
+            Animal dog = new Dog();
+            dog.makeSound();  // Output: Woof
+            dog.move();       // Output: Run
+        }
+    }
+}
+```
+
+### Herencia ('extends')
+La herencia permite crear una nueva clase basada en una clase existente. La nueva clase hereda los campos y métodos de la clase base.
+
+```java
+    class Animal {
+        void eat() {
+            System.out.println("Eating...");
+        }
+    }
+    
+    class Dog extends Animal {
+        void bark() {
+            System.out.println("Woof");
+        }
+    }
+    
+    public class InheritanceExample {
+        public static void main(String[] args) {
+            Dog dog = new Dog();
+            dog.eat();  // Output: Eating...
+            dog.bark(); // Output: Woof
+        }
+    }
+```
+
+### Clases abstractas
+Una clase abstracta es similar a una interfaz, pero puede tener métodos con implementaciones completas y también puede contener campos. No se puede instanciar directamente.
+
+```java
+    abstract class Animal {
+        abstract void makeSound();
+    
+        void sleep() {
+            System.out.println("Sleeping...");
+        }
+    }
+    
+    class Dog extends Animal {
+        @Override
+        void makeSound() {
+            System.out.println("Woof");
+        }
+    }
+    
+    public class AbstractClassExample {
+        public static void main(String[] args) {
+            Dog dog = new Dog();
+            dog.makeSound();  // Output: Woof
+            dog.sleep();      // Output: Sleeping...
+        }
+    }
+```
+
+### Implementación múltiple con interfaces
+Una clase en Java puede implementar múltiples interfaces, lo que permite la herencia múltiple en términos de comportamiento.
+
+```java
+    interface Animal {
+        void makeSound();
+    }
+    
+    interface Movable {
+        void move();
+    }
+    
+    class Dog implements Animal, Movable {
+        @Override
+        public void makeSound() {
+            System.out.println("Woof");
+        }
+    
+        @Override
+        public void move() {
+            System.out.println("Run");
+        }
+    }
+    
+    public class MultipleInterfacesExample {
+        public static void main(String[] args) {
+            Dog dog = new Dog();
+            dog.makeSound();  // Output: Woof
+            dog.move();       // Output: Run
+        }
+    }
+```
+
+### super Keyword
+La palabra clave super se usa para referirse a la clase base inmediata de la clase derivada. Se puede usar para llamar a métodos y constructores de la clase base.
+```java
+    class Animal {
+        void makeSound() {
+            System.out.println("Some sound");
+        }
+    }
+    
+    class Dog extends Animal {
+        @Override
+        void makeSound() {
+            super.makeSound(); // Llama al método makeSound() de la clase base
+            System.out.println("Woof");
+        }
+    }
+    
+    public class SuperKeywordExample {
+        public static void main(String[] args) {
+            Dog dog = new Dog();
+            dog.makeSound();  // Output: Some sound \n Woof
+        }
+    }
+```
+
+## Patrones de diseño
+### Patrón Singleton
+El patrón Singleton asegura que una clase tenga una única instancia y proporciona un punto de acceso global a esta instancia.
+```java
+    public class Singleton {
+        private static Singleton instance;
+    
+        // Constructor privado para evitar la instanciación directa
+        private Singleton() {}
+    
+        // Método estático para obtener la instancia única
+        public static Singleton getInstance() {
+            if (instance == null) {
+                instance = new Singleton();
+            }
+            return instance;
+        }
+    
+        // Método de prueba para el singleton
+        public void showMessage() {
+            System.out.println("¡Hola! Soy un singleton.");
+        }
+    }
+    
+    // Main class para probar el Singleton
+    public class SingletonMain {
+        public static void main(String[] args) {
+            // Obtener la instancia del Singleton
+            Singleton singleton = Singleton.getInstance();
+    
+            // Llamar a un método de prueba
+            singleton.showMessage();
+        }
+    }
+```
+
+### Patrón Factory Method
+El patrón Factory Method define una interfaz para crear objetos en una superclase, pero permite a las subclases alterar el tipo de objetos que se crearán.
+```java
+//FILE1
+// Interfaz para los productos (Vehículos)
+interface Vehicle {
+    void manufacture();
+}
+
+// Clases concretas de productos (Automóvil y Motocicleta)
+class Car implements Vehicle {
+    @Override
+    public void manufacture() {
+        System.out.println("Fabricando un automóvil");
+    }
+}
+
+class Motorcycle implements Vehicle {
+    @Override
+    public void manufacture() {
+        System.out.println("Fabricando una motocicleta");
+    }
+}
+
+//FILE2
+// Interfaz para la fábrica de productos (Vehículos)
+interface VehicleFactory {
+    Vehicle createVehicle();
+}
+
+// Fábrica para crear automóviles
+class CarFactory implements VehicleFactory {
+    @Override
+    public Vehicle createVehicle() {
+        return new Car();
+    }
+}
+
+// Fábrica para crear motocicletas
+class MotorcycleFactory implements VehicleFactory {
+    @Override
+    public Vehicle createVehicle() {
+        return new Motorcycle();
+    }
+}
+
+///FILE3
+//Ejemplo de uso en main
+public class FactoryMethodExample {
+    public static void main(String[] args) {
+        // Crear una fábrica de automóviles
+        VehicleFactory carFactory = new CarFactory();
+
+        // Utilizar la fábrica de automóviles para crear un automóvil
+        Vehicle car = carFactory.createVehicle();
+        car.manufacture();  // Output: Fabricando un automóvil
+
+        // Crear una fábrica de motocicletas
+        VehicleFactory motorcycleFactory = new MotorcycleFactory();
+
+        // Utilizar la fábrica de motocicletas para crear una motocicleta
+        Vehicle motorcycle = motorcycleFactory.createVehicle();
+        motorcycle.manufacture();  // Output: Fabricando una motocicleta
+    }
+}
+```
+
+### Decorator
+El patrón Decorator permite añadir comportamiento a objetos individuales de forma dinámica y flexible, sin afectar a otros objetos de la misma clase.
+```java
+//FILE1
+// Interfaz para la pizza
+interface Pizza {
+    String getDescription();
+    double getCost();
+}
+
+// Clase base de la pizza
+class PlainPizza implements Pizza {
+    @Override
+    public String getDescription() {
+        return "Pizza";
+    }
+
+    @Override
+    public double getCost() {
+        return 5.0; // Costo base de la pizza
+    }
+}
+
+//FILE2
+// Decorador abstracto
+abstract class PizzaDecorator implements Pizza {
+    protected Pizza decoratedPizza;
+
+    public PizzaDecorator(Pizza decoratedPizza) {
+        this.decoratedPizza = decoratedPizza;
+    }
+
+    public String getDescription() {
+        return decoratedPizza.getDescription();
+    }
+
+    public double getCost() {
+        return decoratedPizza.getCost();
+    }
+}
+
+// Decorador concreto para queso extra
+class CheeseDecorator extends PizzaDecorator {
+    public CheeseDecorator(Pizza decoratedPizza) {
+        super(decoratedPizza);
+    }
+
+    @Override
+    public String getDescription() {
+        return decoratedPizza.getDescription() + ", Queso extra";
+    }
+
+    @Override
+    public double getCost() {
+        return decoratedPizza.getCost() + 1.5; // Costo adicional por queso
+    }
+}
+
+// Decorador concreto para pepperoni
+class PepperoniDecorator extends PizzaDecorator {
+    public PepperoniDecorator(Pizza decoratedPizza) {
+        super(decoratedPizza);
+    }
+
+    @Override
+    public String getDescription() {
+        return decoratedPizza.getDescription() + ", Pepperoni";
+    }
+
+    @Override
+    public double getCost() {
+        return decoratedPizza.getCost() + 2.0; // Costo adicional por pepperoni
+    }
+}
+
+//FILE3
+public class DecoratorPatternExample {
+    public static void main(String[] args) {
+        // Crear una pizza básica
+        Pizza pizza = new PlainPizza();
+        System.out.println("Descripción: " + pizza.getDescription());
+        System.out.println("Costo: $" + pizza.getCost());
+
+        // Decorar la pizza con queso extra
+        pizza = new CheeseDecorator(pizza);
+        System.out.println("Descripción: " + pizza.getDescription());
+        System.out.println("Costo: $" + pizza.getCost());
+
+        // Decorar la pizza con pepperoni además del queso extra
+        pizza = new PepperoniDecorator(pizza);
+        System.out.println("Descripción: " + pizza.getDescription());
+        System.out.println("Costo: $" + pizza.getCost());
+    }
+}
+```
+
+Mas información:
 https://www.geeksforgeeks.org/java-developer-learning-path-a-complete-roadmap/
