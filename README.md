@@ -709,6 +709,25 @@ Conceptos a Practicar: Entrada/Salida de archivos (File, BufferedReader), manipu
 Descripción: Crea clases en Java para modelar una biblioteca. Incluye clases para libros, usuarios (clientes), y métodos para prestar libros, devolver libros, y consultar disponibilidad.
 Conceptos a Practicar: Definición de clases, relaciones entre objetos, métodos, colecciones (List, Map).
 
+12. Uso de Map
+Descripción del problema:
+Implementa un programa en Java que cuente la frecuencia de palabras en un texto. Utiliza un Map para almacenar cada palabra como clave y el número de veces que aparece como valor. El texto puede ser ingresado directamente en el código o mediante entrada del usuario.
+Requisitos:
+Utiliza un HashMap para almacenar las palabras y sus frecuencias.
+Divide el texto en palabras (puedes considerar cualquier separador de palabras como espacios, signos de puntuación, etc.).
+Convierte todas las palabras a minúsculas antes de contarlas para evitar diferencias por capitalización.
+Imprime la frecuencia de cada palabra al final.
+
+13. Uso de Herencia, Interfaces, Clases Bases y Polimorfismo
+Descripción del problema:
+Diseña un sistema en Java para modelar diferentes tipos de vehículos. Debes utilizar herencia para modelar diferentes tipos de vehículos como automóviles y bicicletas. Define una interfaz común para todos los vehículos con métodos como acelerar() y frenar(). Implementa al menos una clase base abstracta que implemente parte de la funcionalidad común de los vehículos y deja métodos abstractos para la funcionalidad específica de cada tipo de vehículo.
+Requisitos:
+Define una interfaz Vehiculo con métodos acelerar() y frenar().
+Crea una clase base abstracta VehiculoBase que implemente la interfaz Vehiculo y tenga métodos y atributos comunes a todos los vehículos.
+Implementa al menos una clase concreta para un tipo de vehículo (por ejemplo, Automovil o Bicicleta) que extienda VehiculoBase y defina su funcionalidad específica en los métodos acelerar() y frenar().
+Demuestra el uso de polimorfismo al tratar diferentes tipos de vehículos a través de referencias de la interfaz común Vehiculo.
+Estos problemas te permitirán practicar conceptos importantes en Java como el uso de colecciones (Map), manejo de herencia, interfaces, clases abstractas y polimorfismo. Implementar estos ejemplos te ayudará a consolidar tus habilidades en programación orientada a objetos y manejo de estructuras de datos en Java.
+
 
 Mas información:
 https://www.geeksforgeeks.org/java-developer-learning-path-a-complete-roadmap/
